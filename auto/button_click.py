@@ -21,7 +21,7 @@ class ButtonClick(unittest.TestCase):
     def test_button_click(self):
         driver = self.driver
         driver.get(self.base_url + "/simple/")
-        driver.find_element_by_id("button").click()
+        driver.find_element_by_id("button1").click()
         self.assertEqual("Button 1 Clicked", driver.find_element_by_id("button1text").text)
     
     def is_element_present(self, how, what):
