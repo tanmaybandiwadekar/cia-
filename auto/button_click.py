@@ -6,9 +6,12 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
+from pyvirtualdisplay import Display
 
 class ButtonClick(unittest.TestCase):
     def setUp(self):
+	self.display = Display(visible=0, size=(1900, 1200))
+        self.display.start()
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.base_url = "http://localhost:8000/simple/"
