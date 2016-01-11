@@ -10,7 +10,7 @@ from pyvirtualdisplay import Display
 
 class ButtonClick(unittest.TestCase):
     def setUp(self):
-	self.display = Display(visible=0, size=(1900, 1200))
+        self.display = Display(visible=0, size=(1900, 1200))
         self.display.start()
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
@@ -23,7 +23,7 @@ class ButtonClick(unittest.TestCase):
         driver.get(self.base_url + "/simple/")
         driver.find_element_by_id("button1").click()
         self.assertEqual("Button 1 Clicked", driver.find_element_by_id("button1text").text)
-		driver.find_element_by_id("button2").click()
+        driver.find_element_by_id("button2").click()
         self.assertEqual("Button 2 Clicked", driver.find_element_by_id("button2text").text)
     
     def is_element_present(self, how, what):
