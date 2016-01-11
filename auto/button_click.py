@@ -7,6 +7,14 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 from pyvirtualdisplay import Display
+import logging
+
+logger = logging.getLogger('myapp')
+hdlr = logging.FileHandler('myapp.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
 
 class ButtonClick(unittest.TestCase):
     def setUp(self):
@@ -19,12 +27,16 @@ class ButtonClick(unittest.TestCase):
         self.accept_next_alert = True
     
     def test_button_click(self):
-        driver = self.driver
-        driver.get(self.base_url + "/simple/")
-        driver.find_element_by_id("button1").click()
-        self.assertEqual("Button 1 Clicked", driver.find_element_by_id("button1text").text)
-        # driver.find_element_by_id("button2").click()
-        # self.assertEqual("Button 2 Clicked", driver.find_element_by_id("button2text").text)
+        try:
+            driver = self.driver
+            driver.get(self.base_url + "/simple/")
+            driver.find_element_by_id("button1").click()
+            self.assertEqual("Button 1 Clicked", driver.find_element_by_id("button1text").text)
+            # driver.find_element_by_id("button2").click()
+            #  self.assertEqual("Button 2 Clicked", driver.find_element_by_id("button2text").text)
+            logger.info("Test Passed")
+        except Exception as e:
+            logger.error("Test Failed")
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
